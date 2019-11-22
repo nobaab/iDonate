@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "1050917930024",
+    "firebase_url": "https://i-donate-402dd.firebaseio.com",
+    "project_id": "i-donate-402dd",
+    "storage_bucket": "i-donate-402dd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1050917930024:android:8dc6b5e448f8ac7226e11d",
+        "android_client_info": {
+          "package_name": "com.mozammel.idonate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1050917930024-geucrudpd7pehhb190d96t2iauvd1lch.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_iVr0PepZEWKb2GOs1OmKHNDsHkh3aZg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1050917930024-geucrudpd7pehhb190d96t2iauvd1lch.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1050917930024-mledbkbp8p3fc27h62c8tabhktta4b6r.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mozammel.idonate"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

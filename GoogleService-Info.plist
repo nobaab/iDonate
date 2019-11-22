@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1050917930024-mledbkbp8p3fc27h62c8tabhktta4b6r.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1050917930024-mledbkbp8p3fc27h62c8tabhktta4b6r</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBe9YtM6qiL488TCk2kC4WMBIPqOlt7CuA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1050917930024</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.mozammel.idonate</string>
+	<key>PROJECT_ID</key>
+	<string>i-donate-402dd</string>
+	<key>STORAGE_BUCKET</key>
+	<string>i-donate-402dd.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1050917930024:ios:d84a24191666fcb926e11d</string>
+	<key>DATABASE_URL</key>
+	<string>https://i-donate-402dd.firebaseio.com</string>
+</dict>
+</plist>
