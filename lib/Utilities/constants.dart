@@ -4,3 +4,7 @@ final _firestore = Firestore.instance;
 
 final userRef = _firestore.collection('users');
 
+class MainFields{
+  static const String users= "users";
+
+}

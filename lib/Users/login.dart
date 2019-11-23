@@ -3,17 +3,19 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:idonate/Pages/HomePage.dart';
+import 'package:idonate/Providers/authProvider.dart';
 import 'package:idonate/Users/signupasked.dart';
 import 'package:idonate/Widgets/SocialIcons.dart';
+import 'package:provider/provider.dart';
 
 import '../CustomIcons.dart';
 
-class Login extends StatefulWidget {
+class LoginPage extends StatefulWidget {
   @override
-  _LoginState createState() => new _LoginState();
+  _LoginPageState createState() => new _LoginPageState();
 }
 
-class _LoginState extends State<Login> {
+class _LoginPageState extends State<LoginPage> {
   bool _isSelected = false;
 
   final GlobalKey<FormState> _loginFormKey = GlobalKey<FormState>();
@@ -33,20 +35,14 @@ class _LoginState extends State<Login> {
     });
   }
 
-  void validateAndSave() {
+  void validateAndSave(AuthP authP) {
     if (_loginFormKey.currentState.validate()) {
-      FirebaseAuth.instance
-          .signInWithEmailAndPassword(
-              email: loginEmailController.text,
-              password: loginPasswordController.text)
-          .then((currentUser) => Firestore.instance
-              .collection("users")
-              .document(currentUser.user.uid)
-              .get()
-              .then((DocumentSnapshot result) => Navigator.pushReplacement(
-                  context, MaterialPageRoute(builder: (context) => HomePage())))
-              .catchError((err) => print(err)))
-          .catchError((err) => print(err));
+      String email = loginEmailController.text;
+      String password = loginPasswordController.text;
+
+      authP.signIn(email, password);
+
+      Navigator.push(context, MaterialPageRoute(builder: (context) =>HomePage()));
     }
   }
 
@@ -100,6 +96,8 @@ class _LoginState extends State<Login> {
     ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
     ScreenUtil.instance =
         ScreenUtil(width: 750, height: 1334, allowFontScaling: true);
+
+    var authP= Provider.of<AuthP>(context);
     return new Form(
       key: _loginFormKey,
       child: Scaffold(
@@ -266,7 +264,7 @@ class _LoginState extends State<Login> {
                               color: Colors.transparent,
                               child: InkWell(
                                 onTap: () {
-                                  validateAndSave();
+                                  validateAndSave(authP);
                                 },
                                 child: Center(
                                   child: Text("SIGNIN",

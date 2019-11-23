@@ -1,5 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:idonate/Providers/authProvider.dart';
+import 'package:idonate/Utilities/constants.dart';
+import 'package:provider/provider.dart';
+
 final startColor = Color(0xFFaa7ce4);
 final endColor = Color(0xFFe46792);
 final titleColor = Color(0xff444444);
@@ -14,16 +18,21 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
-    return new StreamBuilder<QuerySnapshot>(
-        stream: Firestore.instance.collection("users").snapshots(),
-        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-          if (!snapshot.hasData) return new CircularProgressIndicator();
-          return new Column(children: getExpenseItems(snapshot));
-        });
+    var authP= Provider.of<AuthP>(context);
+    var uid = authP.uid;
+    return
+        FutureBuilder(
+            future: Firestore.instance.collection(MainFields.users).document(uid).get(),
+            builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+              if (!snapshot.hasData) return  CircularProgressIndicator();
+              return  getExpenseItems(snapshot);
+            });
   }
 
-  getExpenseItems(AsyncSnapshot<QuerySnapshot> snapshot) {
-    return snapshot.data.documents.map((doc) => new Column(
+  getExpenseItems(AsyncSnapshot<DocumentSnapshot> snapshot) {
+    var doc = Map.from(snapshot.data.data);
+
+    return doc!=null? Column(
       children: <Widget>[
         SizedBox(
           height: 20,
@@ -192,6 +201,8 @@ class _ProfilePageState extends State<ProfilePage> {
           ],
         )
       ],
-    )).toList();
+    ): Container( child: Center(
+      child: Text("Snapshot null"),
+    ),);
   }
 }

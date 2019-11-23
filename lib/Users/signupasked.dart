@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:idonate/Users/signuporg.dart';
-import 'package:idonate/Users/signuporg.dart';
 import 'package:idonate/Users/signupuser.dart';
 
 
