@@ -10,7 +10,7 @@ final titleColor = Color(0xff444444);
 final textColor = Color(0xFFa9a9a9);
 final shadowColor = Color(0xffe9e9f4);
 
-class ProfilePage extends StatefulWidget {
+class ProfilePage extends StatefulWidget {6
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
