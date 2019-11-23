@@ -1,6 +1,7 @@
 import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:idonate/Pages/MainHomePage.dart';
+import 'package:idonate/Pages/NewPost.dart';
 import 'package:idonate/Pages/ProfilePage.dart';
 import 'package:idonate/Pages/SettingPage.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
@@ -16,7 +17,9 @@ class _HomePageState extends State<HomePage> {
   final _pageOption =[
 
     MainHomePage(),
+    NewPost(),
     ProfilePage(),
+
     SettingPage(),
   ];
   @override
@@ -26,7 +29,9 @@ class _HomePageState extends State<HomePage> {
         bottomNavigationBar: FancyBottomNavigation(
           tabs: [
             TabData(iconData: LineAwesomeIcons.home, title: "Home"),
+            TabData(iconData: LineAwesomeIcons.plus, title: "Fund"),
             TabData(iconData: LineAwesomeIcons.user, title: "Profile"),
+
             TabData(iconData: LineAwesomeIcons.bell, title: "Setting")
           ],
           onTabChangedListener: (position) {

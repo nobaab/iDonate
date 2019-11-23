@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:idonate/Providers/authProvider.dart';
 import 'package:idonate/Utilities/constants.dart';
 import 'package:provider/provider.dart';
+import 'package:progress_indicators/progress_indicators.dart';
 
 final startColor = Color(0xFFaa7ce4);
 final endColor = Color(0xFFe46792);
@@ -21,12 +22,14 @@ class _ProfilePageState extends State<ProfilePage> {
     var authP= Provider.of<AuthP>(context);
     var uid = authP.uid;
     return
-        FutureBuilder(
-            future: Firestore.instance.collection(MainFields.users).document(uid).get(),
-            builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-              if (!snapshot.hasData) return  CircularProgressIndicator();
-              return  userInfo(snapshot);
-            });
+      FutureBuilder(
+          future: Firestore.instance.collection(MainFields.users).document(uid).get(),
+          builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+            if (!snapshot.hasData) return Center(
+              child: JumpingDotsProgressIndicator(fontSize: 30.0,),
+            );
+            return  userInfo(snapshot);
+          });
   }
 
   userInfo(AsyncSnapshot<DocumentSnapshot> snapshot) {
@@ -34,7 +37,7 @@ class _ProfilePageState extends State<ProfilePage> {
     return doc!=null? Column(
       children: <Widget>[
         SizedBox(
-          height: 150,
+          height: 100,
         ),
         Container(
           height: 130,

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
 
+import 'NewPost.dart';
+
 class MainHomePage extends StatefulWidget {
   @override
   _MainHomePageState createState() => _MainHomePageState();
@@ -25,12 +27,7 @@ class _MainHomePageState extends State<MainHomePage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: Icon(LineAwesomeIcons.heart_o,
-                    color: Colors.white,
-                    size: 30,),
-                ),
+
                 Text(
                   "Explore",
                   style: TextStyle(
@@ -129,10 +126,12 @@ class _MainHomePageState extends State<MainHomePage> {
                 ),
               ],
             ),
-          )
+          ),
         ],
+
       ),
     );
+
   }
 }
 
