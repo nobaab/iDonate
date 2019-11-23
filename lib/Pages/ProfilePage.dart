@@ -25,17 +25,16 @@ class _ProfilePageState extends State<ProfilePage> {
             future: Firestore.instance.collection(MainFields.users).document(uid).get(),
             builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
               if (!snapshot.hasData) return  CircularProgressIndicator();
-              return  getExpenseItems(snapshot);
+              return  userInfo(snapshot);
             });
   }
 
-  getExpenseItems(AsyncSnapshot<DocumentSnapshot> snapshot) {
+  userInfo(AsyncSnapshot<DocumentSnapshot> snapshot) {
     var doc = Map.from(snapshot.data.data);
-
     return doc!=null? Column(
       children: <Widget>[
         SizedBox(
-          height: 20,
+          height: 150,
         ),
         Container(
           height: 130,
@@ -50,7 +49,6 @@ class _ProfilePageState extends State<ProfilePage> {
         SizedBox(
           height: 10,
         ),
-
 
         Text(
           doc['name'],

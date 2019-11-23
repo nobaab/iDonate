@@ -29,6 +29,7 @@ dependencies:
   cloud_firestore: ^0.12.10+2
   fancy_bottom_navigation: ^0.3.2
   provider: ^3.1.0+1
+  line_awesome_icons: ^1.0.4+2
 
 dev_dependencies:
   flutter_test:
@@ -53,6 +54,15 @@ flutter:
     - assets/logo.png
     - assets/imagemain.jpg
     - assets/ill.png
+    - assets/image1.png
+    - assets/image2.png
+    - assets/image3.png
+    - assets/slide1.png
+    - assets/slide2.png
+    - assets/slide3.png
+    - assets/ad1.png
+    - assets/ad2.png
+    - assets/ad3.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -78,5 +88,9 @@ flutter:
     - family: Poppins-Medium
       fonts:
         - asset: assets/Poppins-Medium.ttf
+    - family: CentraleSansRegular
+      fonts:
+        - asset : assets/CentraleSansRegular.otf
+
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

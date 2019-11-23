@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:idonate/Pages/MainHomePage.dart';
 import 'package:idonate/Pages/ProfilePage.dart';
 import 'package:idonate/Pages/SettingPage.dart';
+import 'package:line_awesome_icons/line_awesome_icons.dart';
 
 class HomePage extends StatefulWidget {
 
@@ -22,15 +23,11 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: _pageOption[_selectedPage],
-        appBar: AppBar(
-          title: new Text("I Donate",
-              style: TextStyle(fontFamily: "Poppins-Bold")),
-        ),
         bottomNavigationBar: FancyBottomNavigation(
           tabs: [
-            TabData(iconData: Icons.home, title: "Home"),
-            TabData(iconData: Icons.person, title: "Profile"),
-            TabData(iconData: Icons.settings, title: "Setting")
+            TabData(iconData: LineAwesomeIcons.home, title: "Home"),
+            TabData(iconData: LineAwesomeIcons.user, title: "Profile"),
+            TabData(iconData: LineAwesomeIcons.bell, title: "Setting")
           ],
           onTabChangedListener: (position) {
             setState(() {

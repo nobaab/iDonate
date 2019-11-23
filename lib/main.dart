@@ -32,26 +32,25 @@ class AuthDecider extends StatelessWidget {
     var authP = Provider.of<AuthP>(context);
 
     return FutureBuilder(
-              future: authP.checkStatus(),
-              builder: (context, asyncSnap) {
-                switch(asyncSnap.connectionState){
-                  case ConnectionState.done:
-                    if(authP.uid!=null)
-                     return HomePage();
-                    else
-                     return LoginPage();
-                    break;
-                  case ConnectionState.none:
-                    return Center(
-                     child: Text("Network Error, check conenction"),);
-                    break;
+        future: authP.checkStatus(),
+        builder: (context, asyncSnap) {
+          switch(asyncSnap.connectionState){
+            case ConnectionState.done:
+              if(authP.uid!=null)
+                return HomePage();
+              else
+                return LoginPage();
+              break;
+            case ConnectionState.none:
+              return Center(
+                child: Text("Network Error, check conenction"),);
+              break;
 
-                  default:
-                    return Container();
-                    break;
-                }
-              }
-          );
+            default:
+              return Container();
+              break;
+          }
+        }
+    );
   }
 }
-
