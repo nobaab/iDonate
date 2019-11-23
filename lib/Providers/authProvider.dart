@@ -14,6 +14,7 @@ class AuthP extends ChangeNotifier{
 
   signOut(){
 
+
   }
 
   createAccount(String email, String password){

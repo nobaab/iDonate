@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:idonate/Users/login.dart';
+import 'package:idonate/data/auth_data.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
 
 class SettingPage extends StatefulWidget {
@@ -9,13 +10,7 @@ class SettingPage extends StatefulWidget {
   _SettingPageState createState() => _SettingPageState();
 }
 
-Future<void> _signOut() async {
-  try {
-    await FirebaseAuth.instance.signOut();
-  } catch (e) {
-    print(e); // TODO: show dialog with error
-  }
-}
+
 
 class _SettingPageState extends State<SettingPage> {
   @override
@@ -33,9 +28,9 @@ class _SettingPageState extends State<SettingPage> {
           Divider(),
           ListTile(
             onTap: (){
-
-
-            },
+              AuthData.auth.signOut();
+              Navigator.push(context, MaterialPageRoute(builder: (context) =>LoginPage()));
+              },
             leading: Icon(LineAwesomeIcons.sign_out),
             title: Text('Sign Out',style: TextStyle(fontFamily: "Poppins-Medium"),),
           ),
