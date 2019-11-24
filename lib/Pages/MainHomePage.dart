@@ -16,7 +16,7 @@ class _MainHomePageState extends State<MainHomePage> {
         children: <Widget>[
           Image(
             alignment: Alignment.topCenter,
-            image: AssetImage("assets/image3.png"),
+            image: AssetImage("assets/imagemain.jpg"),
             fit: BoxFit.contain,
             width: double.infinity,
           ),
@@ -31,9 +31,9 @@ class _MainHomePageState extends State<MainHomePage> {
                 Text(
                   "Explore",
                   style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       fontSize: 35,
-                      fontFamily: 'CentraleSansRegular'),
+                      fontFamily: 'Poppins-Bold'),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -41,7 +41,7 @@ class _MainHomePageState extends State<MainHomePage> {
                     Text(
                       "Categories",
                       style: TextStyle(
-                          color: Colors.grey[300],
+                          color: Colors.black,
                           fontSize: 32,
                           fontFamily: 'CentraleSansRegular',
                           fontWeight: FontWeight.w100),
@@ -49,7 +49,7 @@ class _MainHomePageState extends State<MainHomePage> {
                     Text(
                       "View All",
                       style: TextStyle(
-                          color: Colors.grey[300],
+                          color: Colors.black,
                           fontSize: 20,
                           fontFamily: 'CentraleSansRegular',
                           fontWeight: FontWeight.w100),
@@ -134,4 +134,3 @@ class _MainHomePageState extends State<MainHomePage> {
 
   }
 }
-

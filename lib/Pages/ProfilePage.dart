@@ -26,7 +26,7 @@ class _ProfilePageState extends State<ProfilePage> {
           future: Firestore.instance.collection(MainFields.users).document(uid).get(),
           builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
             if (!snapshot.hasData) return Center(
-              child: JumpingDotsProgressIndicator(fontSize: 30.0,),
+              child: JumpingDotsProgressIndicator(fontSize: 28.0,),
             );
             return  userInfo(snapshot);
           });

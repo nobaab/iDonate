@@ -7,21 +7,19 @@ import 'package:idonate/Pages/SettingPage.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
 
 class HomePage extends StatefulWidget {
-
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
   int _selectedPage = 0;
-  final _pageOption =[
-
+  final _pageOption = [
     MainHomePage(),
     NewPost(),
     ProfilePage(),
-
     SettingPage(),
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +29,6 @@ class _HomePageState extends State<HomePage> {
             TabData(iconData: LineAwesomeIcons.home, title: "Home"),
             TabData(iconData: LineAwesomeIcons.plus, title: "Fund"),
             TabData(iconData: LineAwesomeIcons.user, title: "Profile"),
-
             TabData(iconData: LineAwesomeIcons.bell, title: "Setting")
           ],
           onTabChangedListener: (position) {
