@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:idonate/Widgets/FormSignupOrg.dart';
 
 class Signuporg extends StatefulWidget {
   @override
@@ -8,14 +7,9 @@ class Signuporg extends StatefulWidget {
 }
 
 class _SignuporgState extends State<Signuporg> {
-  bool _isSelected = false;
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _signupOrgFormKey = GlobalKey<FormState>();
 
-  void _radio() {
-    setState(() {
-      _isSelected = !_isSelected;
-    });
-  }
+
 
   Widget radioButton(bool isSelected) => Container(
         width: 16.0,
@@ -49,6 +43,7 @@ class _SignuporgState extends State<Signuporg> {
     ScreenUtil.instance =
         ScreenUtil(width: 750, height: 1334, allowFontScaling: true);
     return new Form(
+      key: _signupOrgFormKey,
       child: Scaffold(
         backgroundColor: Colors.white,
         resizeToAvoidBottomPadding: true,

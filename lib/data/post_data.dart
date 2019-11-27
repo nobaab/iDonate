@@ -1,18 +1,18 @@
 import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:idonate/Models/post_model.dart';
-
 
 final CollectionReference myCollection = Firestore.instance.collection('posts');
 
 class FirestoreService {
-
-  Future<Post> createPosts(String title, String desc,String postdate,String posttype) async {
+  Future<Post> createPosts(
+      String postName, String postDetails, String postCat) async {
     final TransactionHandler createTransaction = (Transaction tx) async {
       final DocumentSnapshot ds = await tx.get(myCollection.document());
 
-      final Post post = new Post(title, desc,postdate,posttype);
-      final Map<String, dynamic> data =post.toMap();
+      final Post post = new Post(postName, postDetails, postCat);
+      final Map<String, dynamic> data = post.toMap();
       await tx.set(ds.reference, data);
       return data;
     };
@@ -36,6 +36,4 @@ class FirestoreService {
     }
     return snapshots;
   }
-
-
 }

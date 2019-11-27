@@ -1,38 +1,33 @@
-class Post{
-  String _title;
-  String _desc;
-  String _postdate;
-  String _posttype;
+class Post {
+  String _postName;
+  String _postDetails;
+  String _postCat;
 
-  Post(this._title,this._desc,this._postdate,this._posttype);
+  Post(this._postName, this._postDetails, this._postCat);
 
-  Post.map(dynamic obj){
-    this._title = obj['title'];
-    this._desc = obj['desc'];
-    this._postdate = obj['postdate'];
-    this._posttype = obj['posttype'];
+  Post.map(dynamic obj) {
+    this._postName = obj['postName'];
+    this._postDetails = obj['postDetails'];
+    this._postCat = obj['postCat'];
   }
 
-  String get  title=> _title;
-  String get desc => _desc;
-  String get postdate => _postdate;
-  String get posttype => _posttype;
+  String get postName => _postName;
 
-  Map<String,dynamic> toMap(){
-    var map=new Map<String,dynamic>();
-    map['title']=_title;
-    map['desc'] = _desc;
-    map['postdate'] = _postdate;
-    map['postype'] = _posttype;
+  String get postDetails => _postDetails;
+
+  String get postCat => _postCat;
+
+  Map<String, dynamic> toMap() {
+    var map = new Map<String, dynamic>();
+    map['postName'] = _postName;
+    map['postDetails'] = _postDetails;
+    map['postCat'] = _postCat;
     return map;
-
-
   }
 
-  Post.fromMap(Map<String,dynamic> map){
-    this._title = map['title'];
-    this._desc = map['desc'];
-    this._postdate = map['postdate'];
-    this._posttype = map['posttype'];
+  Post.fromMap(Map<String, dynamic> map) {
+    this._postName = map['postName'];
+    this._postDetails = map['postDetails'];
+    this._postCat = map['postCat'];
   }
 }

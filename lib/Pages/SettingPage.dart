@@ -1,6 +1,4 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:idonate/Users/login.dart';
 import 'package:idonate/data/auth_data.dart';
 import 'package:line_awesome_icons/line_awesome_icons.dart';
@@ -9,8 +7,6 @@ class SettingPage extends StatefulWidget {
   @override
   _SettingPageState createState() => _SettingPageState();
 }
-
-
 
 class _SettingPageState extends State<SettingPage> {
   @override
@@ -23,16 +19,23 @@ class _SettingPageState extends State<SettingPage> {
           ),
           ListTile(
             leading: Icon(LineAwesomeIcons.user_md),
-            title: Text('Edit Profile',style: TextStyle(fontFamily: "Poppins-Medium"),),
+            title: Text(
+              'Edit Profile',
+              style: TextStyle(fontFamily: "Poppins-Medium"),
+            ),
           ),
           Divider(),
           ListTile(
-            onTap: (){
+            onTap: () {
               AuthData.auth.signOut();
-              Navigator.push(context, MaterialPageRoute(builder: (context) =>LoginPage()));
-              },
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => LoginPage()));
+            },
             leading: Icon(LineAwesomeIcons.sign_out),
-            title: Text('Sign Out',style: TextStyle(fontFamily: "Poppins-Medium"),),
+            title: Text(
+              'Sign Out',
+              style: TextStyle(fontFamily: "Poppins-Medium"),
+            ),
           ),
           Divider(),
         ],

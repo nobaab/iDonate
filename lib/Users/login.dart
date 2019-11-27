@@ -1,5 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:idonate/Pages/HomePage.dart';
@@ -42,7 +40,8 @@ class _LoginPageState extends State<LoginPage> {
 
       authP.signIn(email, password);
 
-      Navigator.push(context, MaterialPageRoute(builder: (context) =>HomePage()));
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => HomePage()));
     }
   }
 
@@ -97,7 +96,7 @@ class _LoginPageState extends State<LoginPage> {
     ScreenUtil.instance =
         ScreenUtil(width: 750, height: 1334, allowFontScaling: true);
 
-    var authP= Provider.of<AuthP>(context);
+    var authP = Provider.of<AuthP>(context);
     return new Form(
       key: _loginFormKey,
       child: Scaffold(

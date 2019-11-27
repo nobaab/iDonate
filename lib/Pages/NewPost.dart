@@ -1,9 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:idonate/Providers/authProvider.dart';
+import 'package:provider/provider.dart';
 
 class NewFund extends StatefulWidget {
   NewFund();
+
   @override
   _NewFundState createState() => _NewFundState();
 }
@@ -11,84 +14,91 @@ class NewFund extends StatefulWidget {
 class _NewFundState extends State<NewFund> {
   final GlobalKey<FormState> _fundFormKey = GlobalKey<FormState>();
 
-  String postTile,postDetails;
+  String userID, postName, postDetails;
 
-  getTaskName(posttitle){
-    this.postTile=posttitle;
+  getUserName(userId) {
+    this.userID = userID;
   }
-  getTaskDetails(postdetails){
-    this.postDetails=postdetails;
+
+  getTaskName(postName) {
+    this.postName = postName;
+  }
+
+  getTaskDetails(postDetails) {
+    this.postDetails = postDetails;
   }
 
   int _myPostType = 0;
   String postVal;
+
   void _handleTaskType(int value) {
     setState(() {
       _myPostType = value;
       switch (_myPostType) {
         case 1:
-          postVal='food';
+          postVal = 'food';
           break;
         case 2:
-          postVal='health';
+          postVal = 'health';
           break;
         case 3:
-          postVal='treatment';
+          postVal = 'treatment';
           break;
         case 4:
-          postVal='clothes';
+          postVal = 'clothes';
           break;
         case 5:
-          postVal='education';
+          postVal = 'education';
           break;
       }
     });
   }
 
-
-
   Widget radioButton(bool isSelected) => Container(
-    width: 16.0,
-    height: 16.0,
-    padding: EdgeInsets.all(2.0),
-    decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        border: Border.all(width: 2.0, color: Colors.black)),
-    child: isSelected
-        ? Container(
-      width: double.infinity,
-      height: double.infinity,
-      decoration:
-      BoxDecoration(shape: BoxShape.circle, color: Colors.black),
-    )
-        : Container(),
-  );
+        width: 16.0,
+        height: 16.0,
+        padding: EdgeInsets.all(2.0),
+        decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(width: 2.0, color: Colors.black)),
+        child: isSelected
+            ? Container(
+                width: double.infinity,
+                height: double.infinity,
+                decoration:
+                    BoxDecoration(shape: BoxShape.circle, color: Colors.black),
+              )
+            : Container(),
+      );
 
   Widget horizontalLine() => Padding(
-    padding: EdgeInsets.symmetric(horizontal: 16.0),
-    child: Container(
-      width: ScreenUtil.getInstance().setWidth(120),
-      height: 1.0,
-      color: Colors.black26.withOpacity(.2),
-    ),
-  );
+        padding: EdgeInsets.symmetric(horizontal: 16.0),
+        child: Container(
+          width: ScreenUtil.getInstance().setWidth(120),
+          height: 1.0,
+          color: Colors.black26.withOpacity(.2),
+        ),
+      );
 
-  createFund(){
-    DocumentReference ds=Firestore.instance.collection('posts').document(postTile);
-    Map<String,dynamic> posts={
-      "posttile":postTile,
-      "postdetails":postDetails,
-      "posttype":postVal,
+  createFund() {
+    var authP = Provider.of<AuthP>(context);
+    var uid = authP.uid;
+    DocumentReference ds =
+        Firestore.instance.collection('posts').document(postName);
+    Map<String, dynamic> posts = {
+      "userID": uid,
+      "postName": postName,
+      "postDetails": postDetails,
+      "postCat": postVal,
     };
 
-    ds.setData(posts).whenComplete((){
+    ds.setData(posts).whenComplete(() {
       print("posts updated");
     });
-
   }
+
   @override
   Widget build(BuildContext context) {
-
     ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
     ScreenUtil.instance =
         ScreenUtil(width: 750, height: 1334, allowFontScaling: true);
@@ -118,21 +128,6 @@ class _NewFundState extends State<NewFund> {
                 padding: EdgeInsets.only(left: 28.0, right: 28.0, top: 60.0),
                 child: Column(
                   children: <Widget>[
-                    Row(
-                      children: <Widget>[
-                        Image.asset(
-                          "assets/logo.png",
-                          width: ScreenUtil.getInstance().setWidth(110),
-                          height: ScreenUtil.getInstance().setHeight(110),
-                        ),
-                        Text("LOGO",
-                            style: TextStyle(
-                                fontFamily: "Poppins-Bold",
-                                fontSize: ScreenUtil.getInstance().setSp(46),
-                                letterSpacing: .6,
-                                fontWeight: FontWeight.bold))
-                      ],
-                    ),
                     SizedBox(
                       height: ScreenUtil.getInstance().setHeight(20),
                     ),
@@ -154,14 +149,14 @@ class _NewFundState extends State<NewFund> {
                           ]),
                       child: Padding(
                         padding:
-                        EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0),
+                            EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text("Raise Fund",
                                 style: TextStyle(
                                     fontSize:
-                                    ScreenUtil.getInstance().setSp(45),
+                                        ScreenUtil.getInstance().setSp(45),
                                     fontFamily: "Poppins-Bold",
                                     letterSpacing: .6)),
                             SizedBox(
@@ -171,32 +166,31 @@ class _NewFundState extends State<NewFund> {
                                 style: TextStyle(
                                     fontFamily: "Poppins-Medium",
                                     fontSize:
-                                    ScreenUtil.getInstance().setSp(26))),
+                                        ScreenUtil.getInstance().setSp(26))),
                             TextField(
                               keyboardType: TextInputType.multiline,
                               maxLines: null,
                               decoration: InputDecoration(),
-                              onChanged: (String name){
+                              onChanged: (String name) {
                                 getTaskName(name);
                               },
                             ),
                             SizedBox(
                               height: ScreenUtil.getInstance().setHeight(30),
                             ),
-                            Text("Email",
+                            Text("Fund Details",
                                 style: TextStyle(
                                     fontFamily: "Poppins-Medium",
                                     fontSize:
-                                    ScreenUtil.getInstance().setSp(26))),
+                                        ScreenUtil.getInstance().setSp(26))),
                             TextField(
                               keyboardType: TextInputType.multiline,
                               maxLines: null,
                               decoration: InputDecoration(),
-                              onChanged: (String taskdetails){
+                              onChanged: (String taskdetails) {
                                 getTaskDetails(taskdetails);
                               },
                             ),
-
                             SizedBox(
                               height: ScreenUtil.getInstance().setHeight(30),
                             ),
@@ -204,7 +198,7 @@ class _NewFundState extends State<NewFund> {
                                 style: TextStyle(
                                     fontFamily: "Poppins-Bold",
                                     fontSize:
-                                    ScreenUtil.getInstance().setSp(26))),
+                                        ScreenUtil.getInstance().setSp(26))),
                             SizedBox(
                               height: ScreenUtil.getInstance().setHeight(30),
                             ),
@@ -290,9 +284,6 @@ class _NewFundState extends State<NewFund> {
                                 ),
                               ],
                             ),
-
-
-
                           ],
                         ),
                       ),
@@ -300,7 +291,6 @@ class _NewFundState extends State<NewFund> {
                     SizedBox(
                       height: ScreenUtil.getInstance().setHeight(20),
                     ),
-
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
@@ -349,5 +339,4 @@ class _NewFundState extends State<NewFund> {
       ),
     );
   }
-
 }

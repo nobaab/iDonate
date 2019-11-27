@@ -14,7 +14,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _selectedPage = 0;
   final _pageOption = [
-   MainHomePage(),
+    MainHomePage(),
     NewFund(),
     ProfilePage(),
     SettingPage(),

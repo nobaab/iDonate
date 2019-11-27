@@ -4,24 +4,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:idonate/Models/user.dart';
 import 'package:idonate/data/auth_data.dart';
 
-class AuthP extends ChangeNotifier{
+class AuthP extends ChangeNotifier {
   String uid;
   User user;
 
-  signIn(String email, String password)async{
+  signIn(String email, String password) async {
     uid = await AuthData.signIn(email, password);
   }
 
-  signOut(){
+  signOut() {}
 
+  createAccount(String email, String password) {}
 
-  }
-
-  createAccount(String email, String password){
-
-  }
-
-  checkStatus()async{
+  checkStatus() async {
     uid = await AuthData.checkStatus();
   }
 }
