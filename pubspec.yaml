@@ -31,8 +31,11 @@ dependencies:
   provider: ^3.1.0+1
   line_awesome_icons: ^1.0.4+2
   progress_indicators: ^0.1.4
-  flutter_form_builder:
-  dropdownfield:
+  flutter_form_builder: ^3.6.1
+  image_picker: ^0.6.2+1
+  firebase_core: ^0.4.2+1
+  firebase_storage: ^3.0.8
+
 
 dev_dependencies:
   flutter_test:

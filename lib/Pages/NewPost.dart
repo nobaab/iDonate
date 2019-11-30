@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:idonate/Providers/authProvider.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 class NewFund extends StatefulWidget {
@@ -14,18 +17,22 @@ class NewFund extends StatefulWidget {
 class _NewFundState extends State<NewFund> {
   final GlobalKey<FormState> _fundFormKey = GlobalKey<FormState>();
 
-  String userID, postName, postDetails;
+  String userID, postName, postDetails, postImgUrl;
 
   getUserName(userId) {
     this.userID = userID;
   }
 
-  getTaskName(postName) {
+  getPostName(postName) {
     this.postName = postName;
   }
 
   getTaskDetails(postDetails) {
     this.postDetails = postDetails;
+  }
+
+  getImageUrl(postImgUrl) {
+    this.postImgUrl = postImgUrl;
   }
 
   int _myPostType = 0;
@@ -42,7 +49,7 @@ class _NewFundState extends State<NewFund> {
           postVal = 'health';
           break;
         case 3:
-          postVal = 'treatment';
+          postVal = 'money';
           break;
         case 4:
           postVal = 'clothes';
@@ -90,10 +97,19 @@ class _NewFundState extends State<NewFund> {
       "postName": postName,
       "postDetails": postDetails,
       "postCat": postVal,
+      "postImgUrl": postImgUrl,
     };
 
     ds.setData(posts).whenComplete(() {
       print("posts updated");
+    });
+  }
+
+  Future<File> imageFile;
+
+  getImage(ImageSource source) {
+    setState(() {
+      imageFile = ImagePicker.pickImage(source: source);
     });
   }
 
@@ -172,7 +188,7 @@ class _NewFundState extends State<NewFund> {
                               maxLines: null,
                               decoration: InputDecoration(),
                               onChanged: (String name) {
-                                getTaskName(name);
+                                getPostName(name);
                               },
                             ),
                             SizedBox(
@@ -187,8 +203,8 @@ class _NewFundState extends State<NewFund> {
                               keyboardType: TextInputType.multiline,
                               maxLines: null,
                               decoration: InputDecoration(),
-                              onChanged: (String taskdetails) {
-                                getTaskDetails(taskdetails);
+                              onChanged: (String postDetails) {
+                                getTaskDetails(postDetails);
                               },
                             ),
                             SizedBox(
@@ -247,7 +263,7 @@ class _NewFundState extends State<NewFund> {
                                       activeColor: Color(0xff4caf50),
                                     ),
                                     Text(
-                                      'Treatment',
+                                      'Money',
                                       style: TextStyle(fontSize: 16.0),
                                     ),
                                   ],
@@ -287,6 +303,15 @@ class _NewFundState extends State<NewFund> {
                           ],
                         ),
                       ),
+                    ),
+                    SizedBox(
+                      height: ScreenUtil.getInstance().setHeight(20),
+                    ),
+                    RaisedButton(
+                      onPressed: () {
+                        getImage(ImageSource.gallery);
+                      },
+                      child: Text('Upload Document'),
                     ),
                     SizedBox(
                       height: ScreenUtil.getInstance().setHeight(20),

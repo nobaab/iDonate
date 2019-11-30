@@ -7,11 +7,11 @@ final CollectionReference myCollection = Firestore.instance.collection('posts');
 
 class FirestoreService {
   Future<Post> createPosts(
-      String postName, String postDetails, String postCat) async {
+      String postName, String postDetails, String postCat, String postImgUrl) async {
     final TransactionHandler createTransaction = (Transaction tx) async {
       final DocumentSnapshot ds = await tx.get(myCollection.document());
 
-      final Post post = new Post(postName, postDetails, postCat);
+      final Post post = new Post(postName, postDetails, postCat,postImgUrl);
       final Map<String, dynamic> data = post.toMap();
       await tx.set(ds.reference, data);
       return data;

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:progress_indicators/progress_indicators.dart';
 
 class MainHomePage extends StatefulWidget {
   @override
@@ -12,6 +13,7 @@ Future getPosts() async {
   return qn.documents;
 }
 
+
 class _MainHomePageState extends State<MainHomePage> {
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,10 @@ class _MainHomePageState extends State<MainHomePage> {
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return Center(
-                child: Text('Loading..'),
+                child: JumpingDotsProgressIndicator(
+                  fontSize: 25.0,
+                  color: Colors.lightBlueAccent,
+                ),
               );
             }
             return SingleChildScrollView(
@@ -58,14 +63,6 @@ class _MainHomePageState extends State<MainHomePage> {
                                   fontFamily: 'CentraleSansRegular',
                                   fontWeight: FontWeight.w100),
                             ),
-                            Text(
-                              "View All",
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 20,
-                                  fontFamily: 'CentraleSansRegular',
-                                  fontWeight: FontWeight.w100),
-                            ),
                           ],
                         )
                       ],
@@ -81,7 +78,9 @@ class _MainHomePageState extends State<MainHomePage> {
                       children: <Widget>[
                         Image.asset("assets/slide1.png"),
                         Image.asset("assets/slide2.png"),
-                        Image.asset("assets/slide3.png")
+                        Image.asset("assets/slide3.png"),
+                        Image.asset("assets/slide3.png"),
+                        Image.asset("assets/slide3.png"),
                       ],
                     ),
                   ),
