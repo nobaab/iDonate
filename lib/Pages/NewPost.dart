@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:idonate/Providers/authProvider.dart';
@@ -18,6 +19,12 @@ class _NewFundState extends State<NewFund> {
   final GlobalKey<FormState> _fundFormKey = GlobalKey<FormState>();
 
   String userID, postName, postDetails, postImgUrl;
+  String filepath = '${DateTime.now()}.png';
+  File _imageFile;
+  StorageUploadTask _uploadTask;
+
+  final FirebaseStorage _storage =
+      FirebaseStorage(storageBucket: 'gs://i-donate-402dd.appspot.com');
 
   getUserName(userId) {
     this.userID = userID;
@@ -99,17 +106,27 @@ class _NewFundState extends State<NewFund> {
       "postCat": postVal,
       "postImgUrl": postImgUrl,
     };
+    setState(() {
+      _saveImage();
+    });
 
     ds.setData(posts).whenComplete(() {
       print("posts updated");
     });
   }
 
-  Future<File> imageFile;
+  Future<String> _saveImage() async {
+    _uploadTask = _storage.ref().child(filepath).putFile(_imageFile);
+    var downURL = await (await _uploadTask.onComplete).ref.getDownloadURL();
+    postImgUrl = downURL;
+    print('LINK URL : $postImgUrl');
+    return postImgUrl;
+  }
 
-  getImage(ImageSource source) {
+  Future<void> _pickImage(ImageSource source) async {
+    File selected = await ImagePicker.pickImage(source: source);
     setState(() {
-      imageFile = ImagePicker.pickImage(source: source);
+      _imageFile = selected;
     });
   }
 
@@ -309,7 +326,7 @@ class _NewFundState extends State<NewFund> {
                     ),
                     RaisedButton(
                       onPressed: () {
-                        getImage(ImageSource.gallery);
+                        _pickImage(ImageSource.gallery);
                       },
                       child: Text('Upload Document'),
                     ),
