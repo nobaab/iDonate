@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +21,8 @@ class _NewFundState extends State<NewFund> {
   String filepath = '${DateTime.now()}.png';
   File _imageFile;
   StorageUploadTask _uploadTask;
+
+
 
   final FirebaseStorage _storage =
       FirebaseStorage(storageBucket: 'gs://i-donate-402dd.appspot.com');
@@ -104,7 +105,6 @@ class _NewFundState extends State<NewFund> {
       "postName": postName,
       "postDetails": postDetails,
       "postCat": postVal,
-      "postImgUrl": postImgUrl,
     };
     setState(() {
       _saveImage();
@@ -115,11 +115,19 @@ class _NewFundState extends State<NewFund> {
     });
   }
 
+
+
+
   Future<String> _saveImage() async {
     _uploadTask = _storage.ref().child(filepath).putFile(_imageFile);
-    var downURL = await (await _uploadTask.onComplete).ref.getDownloadURL();
-    postImgUrl = downURL;
-    print('LINK URL : $postImgUrl');
+    postImgUrl = await (await _uploadTask.onComplete).ref.getDownloadURL();
+//docUrl is your url as a string
+    Firestore.instance
+        .collection('posts')
+        .document(postName)
+        .updateData({"postImgUrl": postImgUrl});
+
+    print(postImgUrl);
     return postImgUrl;
   }
 
@@ -129,6 +137,11 @@ class _NewFundState extends State<NewFund> {
       _imageFile = selected;
     });
   }
+
+
+
+
+
 
   @override
   Widget build(BuildContext context) {
