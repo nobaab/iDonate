@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:idonate/Catagories/PostDetails.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 
 class MainHomePage extends StatefulWidget {
@@ -14,7 +15,25 @@ Future getPosts() async {
 }
 
 
+
+
 class _MainHomePageState extends State<MainHomePage> {
+
+
+  String postImgUrl;
+
+  getImageUrl(postImgUrl) {
+    this.postImgUrl = postImgUrl;
+  }
+
+
+
+
+
+  navigateToDetails(DocumentSnapshot post){
+    Navigator.push(context, MaterialPageRoute(builder: (context) => PostDetails(post: post,)));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -94,12 +113,13 @@ class _MainHomePageState extends State<MainHomePage> {
                         itemBuilder: (_, index) {
                           return ListTile(
                             trailing: Icon(Icons.more_vert),
-                            leading: Image.asset("assets/ad1.png"),
+                            leading: Image.network(snapshot.data[index].data['postImgUrl']),
                             title: Text(snapshot.data[index].data['postName'],
                                 style: TextStyle(
                                     fontFamily: "CentraleSansRegular",
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold)),
+                            onTap: navigateToDetails(snapshot.data[index]),
                             subtitle:
                                 Text(snapshot.data[index].data['postDetails'],
                                     style: TextStyle(
@@ -107,6 +127,7 @@ class _MainHomePageState extends State<MainHomePage> {
                                       fontSize: 15,
                                     )),
                           );
+
                         }),
                   ),
                 ],
