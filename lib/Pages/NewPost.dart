@@ -51,19 +51,19 @@ class _NewFundState extends State<NewFund> {
       _myPostType = value;
       switch (_myPostType) {
         case 1:
-          postVal = 'food';
+          postVal = 'Food';
           break;
         case 2:
-          postVal = 'health';
+          postVal = 'Health';
           break;
         case 3:
-          postVal = 'money';
+          postVal = 'Money';
           break;
         case 4:
-          postVal = 'clothes';
+          postVal = 'Clothes';
           break;
         case 5:
-          postVal = 'education';
+          postVal = 'Education';
           break;
       }
     });

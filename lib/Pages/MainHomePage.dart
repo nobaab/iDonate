@@ -14,24 +14,21 @@ Future getPosts() async {
   return qn.documents;
 }
 
-
-
-
 class _MainHomePageState extends State<MainHomePage> {
-
-
   String postImgUrl;
 
   getImageUrl(postImgUrl) {
     this.postImgUrl = postImgUrl;
   }
 
-
-
-
-
-  navigateToDetails(DocumentSnapshot post){
-    Navigator.push(context, MaterialPageRoute(builder: (context) => PostDetails(post: post,)));
+  navigateToDetails(DocumentSnapshot post) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                PostDetails(
+                  post: post,
+                )));
   }
 
   @override
@@ -48,6 +45,7 @@ class _MainHomePageState extends State<MainHomePage> {
                 ),
               );
             }
+
             return SingleChildScrollView(
               child: Stack(
                 children: <Widget>[
@@ -108,26 +106,26 @@ class _MainHomePageState extends State<MainHomePage> {
                     height: 400,
                     width: 400,
                     child: ListView.builder(
-                        // ignore: missing_return
+                      // ignore: missing_return
                         itemCount: snapshot.data.length,
                         itemBuilder: (_, index) {
                           return ListTile(
+                            onTap: () => navigateToDetails(snapshot.data[index]),
                             trailing: Icon(Icons.more_vert),
-                            leading: Image.network(snapshot.data[index].data['postImgUrl']),
+                            leading: Image.network(
+                              snapshot.data[index].data['postImgUrl'] != null
+                                  ? snapshot.data[index].data['postImgUrl']
+                                  : 'https://www.testingxperts.com/wp-content/uploads/2019/02/placeholder-img.jpg',
+                              width: 120,
+                              fit: BoxFit.fitWidth,
+                            ),
                             title: Text(snapshot.data[index].data['postName'],
                                 style: TextStyle(
                                     fontFamily: "CentraleSansRegular",
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold)),
-                            onTap: navigateToDetails(snapshot.data[index]),
-                            subtitle:
-                                Text(snapshot.data[index].data['postDetails'],
-                                    style: TextStyle(
-                                      fontFamily: "CentraleSansRegular",
-                                      fontSize: 15,
-                                    )),
-                          );
 
+                          );
                         }),
                   ),
                 ],
