@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:idonate/Catagories/Health_Page.dart';
 import 'package:idonate/Catagories/PostDetails.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 
@@ -25,8 +26,7 @@ class _MainHomePageState extends State<MainHomePage> {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) =>
-                PostDetails(
+            builder: (context) => PostDetails(
                   post: post,
                 )));
   }
@@ -34,6 +34,7 @@ class _MainHomePageState extends State<MainHomePage> {
   @override
   Widget build(BuildContext context) {
     return Container(
+
       child: FutureBuilder(
           future: getPosts(),
           builder: (context, snapshot) {
@@ -93,11 +94,26 @@ class _MainHomePageState extends State<MainHomePage> {
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
                       children: <Widget>[
-                        Image.asset("assets/slide1.png"),
-                        Image.asset("assets/slide2.png"),
-                        Image.asset("assets/slide3.png"),
-                        Image.asset("assets/slide3.png"),
-                        Image.asset("assets/slide3.png"),
+                        InkWell(
+                          onTap: () {
+                            Route route = MaterialPageRoute(
+                                builder: (context) => HealthPage());
+                            Navigator.push(context, route);
+                          },
+                          child: Image.asset("assets/slide3.png"),
+                        ),
+                        InkWell(
+                          child: Image.asset("assets/slide2.png"),
+                        ),
+                        InkWell(
+                          child: Image.asset("assets/slide1.png"),
+                        ),
+                        InkWell(
+                          child: Image.asset("assets/slide2.png"),
+                        ),
+                        InkWell(
+                          child: Image.asset("assets/slide2.png"),
+                        ),
                       ],
                     ),
                   ),
@@ -106,25 +122,30 @@ class _MainHomePageState extends State<MainHomePage> {
                     height: 400,
                     width: 400,
                     child: ListView.builder(
-                      // ignore: missing_return
+                        // ignore: missing_return
                         itemCount: snapshot.data.length,
                         itemBuilder: (_, index) {
-                          return ListTile(
-                            onTap: () => navigateToDetails(snapshot.data[index]),
-                            trailing: Icon(Icons.more_vert),
-                            leading: Image.network(
-                              snapshot.data[index].data['postImgUrl'] != null
-                                  ? snapshot.data[index].data['postImgUrl']
-                                  : 'https://www.testingxperts.com/wp-content/uploads/2019/02/placeholder-img.jpg',
-                              width: 120,
-                              fit: BoxFit.fitWidth,
+                          return Card(
+                            elevation: 8.0,
+                            margin: new EdgeInsets.symmetric(
+                                horizontal: 10.0, vertical: 6.0),
+                            child: ListTile(
+                              onTap: () =>
+                                  navigateToDetails(snapshot.data[index]),
+                              trailing: Icon(Icons.more_vert),
+                              leading: Image.network(
+                                snapshot.data[index].data['postImgUrl'] != null
+                                    ? snapshot.data[index].data['postImgUrl']
+                                    : 'https://www.testingxperts.com/wp-content/uploads/2019/02/placeholder-img.jpg',
+                                width: 80,
+                                fit: BoxFit.fitWidth,
+                              ),
+                              title: Text(snapshot.data[index].data['postName'],
+                                  style: TextStyle(
+                                      fontFamily: "CentraleSansRegular",
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold)),
                             ),
-                            title: Text(snapshot.data[index].data['postName'],
-                                style: TextStyle(
-                                    fontFamily: "CentraleSansRegular",
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold)),
-
                           );
                         }),
                   ),

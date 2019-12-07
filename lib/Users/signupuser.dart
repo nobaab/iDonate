@@ -10,7 +10,7 @@ class Signupuser extends StatefulWidget {
 }
 
 class _SignupuserState extends State<Signupuser> {
-  bool _isSelected = false;
+
   final GlobalKey<FormState> _userRegFormKey = GlobalKey<FormState>();
 
   TextEditingController userFullNameController;
@@ -27,11 +27,6 @@ class _SignupuserState extends State<Signupuser> {
     super.initState();
   }
 
-  void _radio() {
-    setState(() {
-      _isSelected = !_isSelected;
-    });
-  }
 
   String userEmailValidator(String value) {
     Pattern pattern =

@@ -27,7 +27,7 @@ class _NewFundState extends State<NewFund> {
   final FirebaseStorage _storage =
       FirebaseStorage(storageBucket: 'gs://i-donate-402dd.appspot.com');
 
-  getUserName(userId) {
+  getUserUid(userId) {
     this.userID = userID;
   }
 
