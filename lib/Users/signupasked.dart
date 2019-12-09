@@ -120,7 +120,7 @@ class _SignupaskedState extends State<Signupasked> {
                             child: InkWell(
                               onTap: () {
                                 Route route = MaterialPageRoute(
-                                    builder: (context) => Signupuser());
+                                    builder: (context) => SignupUser());
                                 Navigator.push(context, route);
                               },
                               child: Center(

@@ -1,32 +1,41 @@
+import 'dart:async';
 import 'dart:io';
+
+import 'package:achievement_view/achievement_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:idonate/Providers/authProvider.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
+
+
 class NewFund extends StatefulWidget {
-  NewFund();
 
   @override
   _NewFundState createState() => _NewFundState();
 }
 
 class _NewFundState extends State<NewFund> {
+  int timeStamp = DateTime.now().millisecondsSinceEpoch;
+  DateFormat dateFormat = DateFormat("yyyy-MM-dd");
+
   final GlobalKey<FormState> _fundFormKey = GlobalKey<FormState>();
 
-  String userID, postName, postDetails, postImgUrl;
+  String userID, postName, postDetails, postImgUrl,userName;
   String filepath = '${DateTime.now()}.png';
   File _imageFile;
   StorageUploadTask _uploadTask;
 
-
-
   final FirebaseStorage _storage =
       FirebaseStorage(storageBucket: 'gs://i-donate-402dd.appspot.com');
 
+  getUserName(userName){
+    userName=userName;
+  }
   getUserUid(userId) {
     this.userID = userID;
   }
@@ -96,8 +105,11 @@ class _NewFundState extends State<NewFund> {
       );
 
   createFund() {
+    String postDate = dateFormat.format(DateTime.now());
     var authP = Provider.of<AuthP>(context);
     var uid = authP.uid;
+
+
     DocumentReference ds =
         Firestore.instance.collection('posts').document(postName);
     Map<String, dynamic> posts = {
@@ -105,18 +117,26 @@ class _NewFundState extends State<NewFund> {
       "postName": postName,
       "postDetails": postDetails,
       "postCat": postVal,
+      "addTime": postDate,
     };
     setState(() {
       _saveImage();
     });
 
+    // ignore: unnecessary_statements
     ds.setData(posts).whenComplete(() {
-      print("posts updated");
+      AchievementView(context,
+          title: "Yes",
+          subTitle: 'Post Successfully Done',
+          icon: Icon(
+            Icons.insert_emoticon,
+            color: Colors.white,
+          ), listener: (status) {
+        print(status);
+      })
+        ..show();
     });
   }
-
-
-
 
   Future<String> _saveImage() async {
     _uploadTask = _storage.ref().child(filepath).putFile(_imageFile);
@@ -137,11 +157,6 @@ class _NewFundState extends State<NewFund> {
       _imageFile = selected;
     });
   }
-
-
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -394,4 +409,5 @@ class _NewFundState extends State<NewFund> {
       ),
     );
   }
+
 }

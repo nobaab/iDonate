@@ -1,6 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:idonate/Catagories/Clothes_Page.dart';
+import 'package:idonate/Catagories/Education_Page.dart';
+import 'package:idonate/Catagories/Food_Page.dart';
 import 'package:idonate/Catagories/Health_Page.dart';
+import 'package:idonate/Catagories/Money_Page.dart';
 import 'package:idonate/Catagories/PostDetails.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 
@@ -103,15 +107,35 @@ class _MainHomePageState extends State<MainHomePage> {
                           child: Image.asset("assets/slide3.png"),
                         ),
                         InkWell(
+                          onTap: () {
+                            Route route = MaterialPageRoute(
+                                builder: (context) => FoodPage());
+                            Navigator.push(context, route);
+                          },
                           child: Image.asset("assets/slide2.png"),
                         ),
                         InkWell(
+                          onTap: () {
+                            Route route = MaterialPageRoute(
+                                builder: (context) => MoneyPage());
+                            Navigator.push(context, route);
+                          },
                           child: Image.asset("assets/slide1.png"),
                         ),
                         InkWell(
+                          onTap: () {
+                            Route route = MaterialPageRoute(
+                                builder: (context) => ClothesPage());
+                            Navigator.push(context, route);
+                          },
                           child: Image.asset("assets/slide2.png"),
                         ),
                         InkWell(
+                          onTap: () {
+                            Route route = MaterialPageRoute(
+                                builder: (context) => EducationPage());
+                            Navigator.push(context, route);
+                          },
                           child: Image.asset("assets/slide2.png"),
                         ),
                       ],
@@ -126,13 +150,16 @@ class _MainHomePageState extends State<MainHomePage> {
                         itemCount: snapshot.data.length,
                         itemBuilder: (_, index) {
                           return Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15.0),
+                            ),
+
                             elevation: 8.0,
                             margin: new EdgeInsets.symmetric(
                                 horizontal: 10.0, vertical: 6.0),
                             child: ListTile(
                               onTap: () =>
                                   navigateToDetails(snapshot.data[index]),
-                              trailing: Icon(Icons.more_vert),
                               leading: Image.network(
                                 snapshot.data[index].data['postImgUrl'] != null
                                     ? snapshot.data[index].data['postImgUrl']
@@ -145,6 +172,12 @@ class _MainHomePageState extends State<MainHomePage> {
                                       fontFamily: "CentraleSansRegular",
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold)),
+
+                              subtitle: Text(snapshot.data[index].data['postDetails'],
+                                  maxLines: 2,
+                                  style: TextStyle(
+                                      fontFamily: "Poppins-Medium",
+                                      fontSize: 14,)),
                             ),
                           );
                         }),

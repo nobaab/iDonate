@@ -2,14 +2,31 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:idonate/Models/user.dart';
 import 'package:idonate/Pages/HomePage.dart';
 
-class Signupuser extends StatefulWidget {
+class SignupUser extends StatefulWidget {
+
+ final UserStore user;
+ SignupUser({this.user});
+
   @override
-  _SignupuserState createState() => new _SignupuserState();
+  _SignupUserState createState() => new _SignupUserState();
 }
 
-class _SignupuserState extends State<Signupuser> {
+class _SignupUserState extends State<SignupUser> {
+
+  String userName,userEmail;
+
+
+  getUserName(userName){
+    userName=userName;
+  }
+
+  getUserEmail(userEmail){
+    userEmail=userEmail;
+  }
+
 
   final GlobalKey<FormState> _userRegFormKey = GlobalKey<FormState>();
 
@@ -20,7 +37,7 @@ class _SignupuserState extends State<Signupuser> {
 
   @override
   void initState() {
-    userFullNameController = new TextEditingController();
+    userFullNameController  = new TextEditingController();
     userEmailController = new TextEditingController();
     userPasswordController = new TextEditingController();
     userSocialController = new TextEditingController();
@@ -46,6 +63,8 @@ class _SignupuserState extends State<Signupuser> {
       return null;
     }
   }
+
+
 
   void userSignupConfirm() {
     if (_userRegFormKey.currentState.validate()) {

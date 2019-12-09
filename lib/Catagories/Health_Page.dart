@@ -9,6 +9,7 @@ class HealthPage extends StatefulWidget {
   _HealthPageState createState() => _HealthPageState();
 }
 
+
 Future getHealthPosts() async {
   var firestore = Firestore.instance;
   QuerySnapshot qn = await firestore
@@ -82,6 +83,9 @@ class _HealthPageState extends State<HealthPage> {
                             itemCount: snapshot.data.length,
                             itemBuilder: (_, index) {
                               return Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15.0),
+                                ),
                                 elevation: 8.0,
                                 margin: new EdgeInsets.symmetric(
                                     horizontal: 10.0, vertical: 6.0),
@@ -101,6 +105,11 @@ class _HealthPageState extends State<HealthPage> {
                                           fontFamily: "CentraleSansRegular",
                                           fontSize: 18,
                                           fontWeight: FontWeight.bold)),
+                                  subtitle: Text(snapshot.data[index].data['postDetails'],
+                                      maxLines: 2,
+                                      style: TextStyle(
+                                        fontFamily: "Poppins-Medium",
+                                        fontSize: 14,)),
                                 ),
                               );
                             }),

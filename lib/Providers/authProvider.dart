@@ -6,7 +6,7 @@ import 'package:idonate/data/auth_data.dart';
 
 class AuthP extends ChangeNotifier {
   String uid;
-  User user;
+  UserStore user;
 
   signIn(String email, String password) async {
     uid = await AuthData.signIn(email, password);
