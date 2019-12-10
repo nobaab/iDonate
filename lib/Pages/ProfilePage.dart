@@ -67,113 +67,6 @@ class _ProfilePageState extends State<ProfilePage> {
               SizedBox(
                 height: 10,
               ),
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Text(
-                    doc['email'],
-                    style: TextStyle(color: textColor, fontSize: 15),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Container(
-                    height: 12,
-                    child: VerticalDivider(
-                      width: 2,
-                      color: Colors.black,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text(
-                    '934 Feedback',
-                    style: TextStyle(color: textColor, fontSize: 15),
-                  ),
-                ],
-              ),
-              Container(
-                margin: EdgeInsets.only(top: 30),
-                padding: EdgeInsets.only(left: 20, right: 20, top: 8),
-                width: 320,
-                height: 200,
-                decoration: BoxDecoration(
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.black.withOpacity(.1),
-                          blurRadius: 30,
-                          spreadRadius: 5)
-                    ],
-                    borderRadius: BorderRadius.circular(10)),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              'website',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 18,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 3,
-                            ),
-                            Text(
-                              'www.google.com',
-                              style: TextStyle(
-                                color: Colors.blue,
-                              ),
-                            )
-                          ],
-                        ),
-                        Column(
-                          children: <Widget>[
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              children: <Widget>[
-                                IconButton(
-                                    icon: Icon(
-                                      Icons.headset,
-                                      size: 15,
-                                    ),
-                                    onPressed: () {}),
-                                IconButton(
-                                    icon: Icon(
-                                      Icons.headset,
-                                      size: 15,
-                                    ),
-                                    onPressed: () {}),
-                              ],
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                    Text(
-                      'Biography',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 18,
-                      ),
-                    ),
-                    SizedBox(
-                      height: 3,
-                    ),
-                    Text(
-                        'Contrary to popular belief, Lorem Ipsum is not simply random text It has roots in a piece of classical Latin literature from 45 BC')
-                  ],
-                ),
-              ),
               Column(
                 children: <Widget>[
                   SizedBox(
@@ -202,7 +95,48 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       ),
                     ],
-                  )
+                  ),
+                  Card(
+                    margin: EdgeInsets.all(16.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(5.0),
+                      ),
+                      child: Column(
+                        children: <Widget>[
+                          ListTile(
+                            title: Text("User information"),
+                          ),
+                          Divider(),
+
+                          ListTile(
+
+                            title: Text("Email"),
+                            subtitle: Text(
+                              doc["email"],
+                            ),
+                            leading: Icon(Icons.email),
+
+                          ),
+                          ListTile(
+                            title: Text("Phone"),
+                            subtitle: Text(
+                              doc["phone"],
+                            ),
+                            leading: Icon(Icons.phone),
+                          ),
+                          ListTile(
+                            title: Text("User ID"),
+                            subtitle: Text(
+                              doc["uid"],
+                            ),
+                            leading: Icon(Icons.note),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ],
               )
             ],

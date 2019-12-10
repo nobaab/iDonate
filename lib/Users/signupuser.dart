@@ -7,8 +7,9 @@ import 'package:idonate/Pages/HomePage.dart';
 
 class SignupUser extends StatefulWidget {
 
- final UserStore user;
- SignupUser({this.user});
+  final UserStore user;
+
+  SignupUser({this.user});
 
   @override
   _SignupUserState createState() => new _SignupUserState();
@@ -16,15 +17,15 @@ class SignupUser extends StatefulWidget {
 
 class _SignupUserState extends State<SignupUser> {
 
-  String userName,userEmail;
+  String userName, userEmail;
 
 
-  getUserName(userName){
-    userName=userName;
+  getUserName(userName) {
+    userName = userName;
   }
 
-  getUserEmail(userEmail){
-    userEmail=userEmail;
+  getUserEmail(userEmail) {
+    userEmail = userEmail;
   }
 
 
@@ -33,14 +34,16 @@ class _SignupUserState extends State<SignupUser> {
   TextEditingController userFullNameController;
   TextEditingController userEmailController;
   TextEditingController userPasswordController;
-  TextEditingController userSocialController;
+  TextEditingController userPhoneController;
+  TextEditingController userAgeController;
 
   @override
   void initState() {
-    userFullNameController  = new TextEditingController();
+    userFullNameController = new TextEditingController();
     userEmailController = new TextEditingController();
     userPasswordController = new TextEditingController();
-    userSocialController = new TextEditingController();
+    userPhoneController = new TextEditingController();
+    userAgeController = new TextEditingController();
     super.initState();
   }
 
@@ -65,33 +68,34 @@ class _SignupUserState extends State<SignupUser> {
   }
 
 
-
   void userSignupConfirm() {
     if (_userRegFormKey.currentState.validate()) {
       if (userPasswordController.text != null) {
         FirebaseAuth.instance
             .createUserWithEmailAndPassword(
-                email: userEmailController.text,
-                password: userPasswordController.text)
-            .then((currentUser) => Firestore.instance
+            email: userEmailController.text,
+            password: userPasswordController.text)
+            .then((currentUser) =>
+            Firestore.instance
                 .collection("users")
                 .document(currentUser.user.uid)
                 .setData({
-                  "uid": currentUser.user.uid,
-                  "name": userFullNameController.text,
-                  "email": userEmailController.text,
-                  "social": userSocialController.text,
-                })
-                .then((result) => {
-                      Navigator.pushAndRemoveUntil(
-                          context,
-                          MaterialPageRoute(builder: (context) => HomePage()),
-                          (_) => false),
-                      userFullNameController.clear(),
-                      userEmailController.clear(),
-                      userPasswordController.clear(),
-                      userSocialController.clear(),
-                    })
+              "uid": currentUser.user.uid,
+              "name": userFullNameController.text,
+              "email": userEmailController.text,
+              "phone": userPhoneController.text,
+            })
+                .then((result) =>
+            {
+              Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomePage()),
+                      (_) => false),
+              userFullNameController.clear(),
+              userEmailController.clear(),
+              userPasswordController.clear(),
+              userPhoneController.clear(),
+            })
                 .catchError((err) => print(err)))
             .catchError((err) => print(err));
       }
@@ -115,7 +119,8 @@ class _SignupUserState extends State<SignupUser> {
     }
   }
 
-  Widget radioButton(bool isSelected) => Container(
+  Widget radioButton(bool isSelected) =>
+      Container(
         width: 16.0,
         height: 16.0,
         padding: EdgeInsets.all(2.0),
@@ -124,15 +129,16 @@ class _SignupUserState extends State<SignupUser> {
             border: Border.all(width: 2.0, color: Colors.black)),
         child: isSelected
             ? Container(
-                width: double.infinity,
-                height: double.infinity,
-                decoration:
-                    BoxDecoration(shape: BoxShape.circle, color: Colors.black),
-              )
+          width: double.infinity,
+          height: double.infinity,
+          decoration:
+          BoxDecoration(shape: BoxShape.circle, color: Colors.black),
+        )
             : Container(),
       );
 
-  Widget horizontalLine() => Padding(
+  Widget horizontalLine() =>
+      Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.0),
         child: Container(
           width: ScreenUtil.getInstance().setWidth(120),
@@ -143,7 +149,8 @@ class _SignupUserState extends State<SignupUser> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.instance = ScreenUtil.getInstance()..init(context);
+    ScreenUtil.instance = ScreenUtil.getInstance()
+      ..init(context);
     ScreenUtil.instance =
         ScreenUtil(width: 750, height: 1334, allowFontScaling: true);
     return new Form(
@@ -192,7 +199,7 @@ class _SignupUserState extends State<SignupUser> {
                     ),
                     Container(
                       width: double.infinity,
-                      height: ScreenUtil.getInstance().setHeight(700),
+                      height: ScreenUtil.getInstance().setHeight(850),
                       decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(8.0),
@@ -208,14 +215,14 @@ class _SignupUserState extends State<SignupUser> {
                           ]),
                       child: Padding(
                         padding:
-                            EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0),
+                        EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text("Registration",
                                 style: TextStyle(
                                     fontSize:
-                                        ScreenUtil.getInstance().setSp(45),
+                                    ScreenUtil.getInstance().setSp(45),
                                     fontFamily: "Poppins-Bold",
                                     letterSpacing: .6)),
                             SizedBox(
@@ -225,7 +232,7 @@ class _SignupUserState extends State<SignupUser> {
                                 style: TextStyle(
                                     fontFamily: "Poppins-Medium",
                                     fontSize:
-                                        ScreenUtil.getInstance().setSp(26))),
+                                    ScreenUtil.getInstance().setSp(26))),
                             TextFormField(
                               decoration: InputDecoration(
                                   hintText: "Jhon Smith",
@@ -240,7 +247,7 @@ class _SignupUserState extends State<SignupUser> {
                                 style: TextStyle(
                                     fontFamily: "Poppins-Medium",
                                     fontSize:
-                                        ScreenUtil.getInstance().setSp(26))),
+                                    ScreenUtil.getInstance().setSp(26))),
                             TextFormField(
                               decoration: InputDecoration(
                                   hintText: "jhon@yourdomain.com",
@@ -249,6 +256,24 @@ class _SignupUserState extends State<SignupUser> {
                               controller: userEmailController,
                               validator: userEmailValidator,
                             ),
+
+
+                            SizedBox(
+                              height: ScreenUtil.getInstance().setHeight(30),
+                            ),
+                            Text("Phone Number",
+                                style: TextStyle(
+                                    fontFamily: "Poppins-Medium",
+                                    fontSize:
+                                    ScreenUtil.getInstance().setSp(26))),
+                            TextFormField(
+                              decoration: InputDecoration(
+                                  hintText: "+88012",
+                                  hintStyle: TextStyle(
+                                      color: Colors.grey, fontSize: 12.0)),
+                              controller: userPhoneController,
+                            ),
+
                             SizedBox(
                               height: ScreenUtil.getInstance().setHeight(30),
                             ),
@@ -256,7 +281,7 @@ class _SignupUserState extends State<SignupUser> {
                                 style: TextStyle(
                                     fontFamily: "Poppins-Medium",
                                     fontSize:
-                                        ScreenUtil.getInstance().setSp(26))),
+                                    ScreenUtil.getInstance().setSp(26))),
                             TextFormField(
                               obscureText: true,
                               decoration: InputDecoration(
@@ -268,19 +293,6 @@ class _SignupUserState extends State<SignupUser> {
                             ),
                             SizedBox(
                               height: ScreenUtil.getInstance().setHeight(35),
-                            ),
-                            Text("Social Profile Link",
-                                style: TextStyle(
-                                    fontFamily: "Poppins-Medium",
-                                    fontSize:
-                                        ScreenUtil.getInstance().setSp(26))),
-                            TextFormField(
-                              obscureText: true,
-                              decoration: InputDecoration(
-                                  hintText: "facebook",
-                                  hintStyle: TextStyle(
-                                      color: Colors.grey, fontSize: 12.0)),
-                              controller: userSocialController,
                             ),
                           ],
                         ),
