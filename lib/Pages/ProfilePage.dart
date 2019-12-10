@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:idonate/Providers/authProvider.dart';
 import 'package:idonate/Utilities/constants.dart';
+import 'package:line_awesome_icons/line_awesome_icons.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 import 'package:provider/provider.dart';
 
@@ -39,108 +40,123 @@ class _ProfilePageState extends State<ProfilePage> {
   userInfo(AsyncSnapshot<DocumentSnapshot> snapshot) {
     var doc = Map.from(snapshot.data.data);
     return doc != null
-        ? Column(
-            children: <Widget>[
-              SizedBox(
-                height: 100,
-              ),
-              Container(
-                height: 130,
-                width: 130,
-                decoration: BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage('assets/ill.png'), fit: BoxFit.fill),
-                    borderRadius: BorderRadius.circular(100),
-                    border: Border.all(
-                        color: Colors.blueAccent.withOpacity(.2), width: 1)),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Text(
+        ? Scaffold(
+            appBar: AppBar(
+              title: Text(
                 doc['name'],
-                style: TextStyle(
-                  color: titleColor,
-                  fontSize: 20,
+              ),
+            ),
+            body: Column(
+              children: <Widget>[
+                SizedBox(
+                  height: 100,
                 ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Column(
-                children: <Widget>[
-                  SizedBox(
-                    height: 30,
+                Container(
+                  height: 130,
+                  width: 130,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage('assets/ill.png'),
+                          fit: BoxFit.fill),
+                      borderRadius: BorderRadius.circular(100),
+                      border: Border.all(
+                          color: Colors.blueAccent.withOpacity(.2), width: 1)),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  doc['name'],
+                  style: TextStyle(
+                    color: titleColor,
+                    fontSize: 20,
+                    fontFamily: "Poppins-Bold",
                   ),
-                  SizedBox(
-                    width: 300,
-                    child: Divider(
-                      height: 1,
-                      color: titleColor.withOpacity(.3),
+
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Column(
+                  children: <Widget>[
+                    SizedBox(
+                      height: 30,
                     ),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    children: <Widget>[
-                      Material(
-                        borderRadius: BorderRadius.all(Radius.circular(100)),
-                        child: InkWell(
+                    SizedBox(
+                      width: 300,
+                      child: Divider(
+                        height: 1,
+                        color: titleColor.withOpacity(.3),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Material(
                           borderRadius: BorderRadius.all(Radius.circular(100)),
-                          onTap: () {},
-                          child: Padding(
-                            padding: const EdgeInsets.all(12),
+                          child: InkWell(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(100)),
+                            onTap: () {},
+                            child: Padding(
+                              padding: const EdgeInsets.all(12),
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  Card(
-                    margin: EdgeInsets.all(16.0),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(5.0),
-                      ),
-                      child: Column(
-                        children: <Widget>[
-                          ListTile(
-                            title: Text("User information"),
-                          ),
-                          Divider(),
-
-                          ListTile(
-
-                            title: Text("Email"),
-                            subtitle: Text(
-                              doc["email"],
+                      ],
+                    ),
+                    Card(
+                      margin: EdgeInsets.all(16.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(5.0),
+                        ),
+                        child: Column(
+                          children: <Widget>[
+                            ListTile(
+                              title: Text("User information",style: TextStyle(
+                                fontFamily: "Poppins-Bold",
+                              ),),
                             ),
-                            leading: Icon(Icons.email),
-
-                          ),
-                          ListTile(
-                            title: Text("Phone"),
-                            subtitle: Text(
-                              doc["phone"],
+                            Divider(),
+                            ListTile(
+                              title: Text("Email",style: TextStyle(
+                                fontFamily: "Poppins-Medium",
+                              ),),
+                              subtitle: Text(
+                                doc["email"],
+                              ),
+                              leading: Icon(Icons.mail),
                             ),
-                            leading: Icon(Icons.phone),
-                          ),
-                          ListTile(
-                            title: Text("User ID"),
-                            subtitle: Text(
-                              doc["uid"],
+                            ListTile(
+                              title: Text("Phone",style: TextStyle(
+                                fontFamily: "Poppins-Medium",
+                              ),),
+                              subtitle: Text(
+                                doc["phone"],
+                              ),
+                              leading: Icon(LineAwesomeIcons.phone),
                             ),
-                            leading: Icon(Icons.note),
-                          ),
-                        ],
+                            ListTile(
+                              title: Text("User ID",style: TextStyle(
+                                fontFamily: "Poppins-Medium",
+                              ),),
+                              subtitle: Text(
+                                doc["uid"],
+                              ),
+                              leading: Icon(LineAwesomeIcons.sticky_note),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
-              )
-            ],
-          )
+                  ],
+                )
+              ],
+            ))
         : Container(
             child: Center(
               child: Text("Snapshot null"),

@@ -31,57 +31,67 @@ class _PostDetailsState extends State<PostDetails> {
               ),
               SizedBox(height: 24),
               Row(
-                  children: <Widget>[
-                    Container(
-                      margin: EdgeInsets.only(left: 40),
-                      padding: EdgeInsets.all(10),
-                      child:Text(
-                        "Time: ${widget.post.data["addTime"]}",
-                        style: TextStyle(
-                          fontFamily: "Poppins-Bold",
-                          fontSize: 15,
-                        ),
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(8),
+                children: <Widget>[
+                  Container(
+                    margin: EdgeInsets.only(left: 40),
+                    padding: EdgeInsets.all(10),
+                    child: Text(
+                      "Time: ${widget.post.data["addTime"]}",
+                      style: TextStyle(
+                        fontFamily: "Poppins-Bold",
+                        fontSize: 15,
                       ),
                     ),
-                    Container(
-                      margin: EdgeInsets.only(left: 20),
-                      padding: EdgeInsets.all(10),
-                      child:Text(
-                       "Catagory: ${widget.post.data["postCat"]}",
+                    decoration: BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(left: 20),
+                    padding: EdgeInsets.all(10),
+                    child: Text(
+                      "Catagory: ${widget.post.data["postCat"]}",
+                      style: TextStyle(
+                        fontFamily: "Poppins-Bold",
+                        fontSize: 15,
+                      ),
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.blue,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 24),
+              Card(
+                child: Column(
+                  children: <Widget>[
+                    ListTile(
+                      title: Text(
+                        widget.post.data["postName"],
                         style: TextStyle(
                           fontFamily: "Poppins-Bold",
+                          fontSize: 20,
+                        ),
+                      ),
+                    ),
+                    Divider(
+                      color: Colors.blue,
+                      thickness: 1.5,
+                    ),
+                    ListTile(
+                      subtitle: Text(
+                        widget.post.data["postDetails"],
+                        style: TextStyle(
+                          fontFamily: "Poppins-Medium",
                           fontSize: 15,
                         ),
-
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.blue,
-                        borderRadius: BorderRadius.circular(8),
+                        textAlign: TextAlign.justify,
                       ),
                     ),
                   ],
-                ),
-              SizedBox(height: 24),
-              Card(
-                child: ListTile(
-                  title: Text(
-                    widget.post.data["postName"],
-                    style: TextStyle(
-                      fontFamily: "Poppins-Medium",
-                      fontSize: 20,
-                    ),
-                  ),
-                  subtitle: Text(
-                    widget.post.data["postDetails"],
-                    style: TextStyle(
-                      fontFamily: "Poppins-Medium",
-                      fontSize: 15,
-                    ),
-                  ),
                 ),
               ),
               SizedBox(height: 24),

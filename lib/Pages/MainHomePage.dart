@@ -177,7 +177,8 @@ class _MainHomePageState extends State<MainHomePage> {
                                   maxLines: 2,
                                   style: TextStyle(
                                       fontFamily: "Poppins-Medium",
-                                      fontSize: 14,)),
+                                      fontSize: 14,),
+                              textAlign: TextAlign.justify,),
                             ),
                           );
                         }),
