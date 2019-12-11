@@ -47,7 +47,8 @@ class AuthDecider extends StatelessWidget {
               break;
 
             default:
-              return Container();
+              return Container(
+              );
               break;
           }
         }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:idonate/Pages/HomePage.dart';
 import 'package:idonate/Providers/authProvider.dart';
-import 'package:idonate/Users/signupasked.dart';
+import 'package:idonate/Users/signupuser.dart';
 import 'package:idonate/Widgets/SocialIcons.dart';
 import 'package:provider/provider.dart';
 
@@ -346,7 +346,7 @@ class _LoginPageState extends State<LoginPage> {
                         InkWell(
                           onTap: () {
                             Route route = MaterialPageRoute(
-                                builder: (context) => Signupasked());
+                                builder: (context) => SignupUser());
                             Navigator.push(context, route);
                           },
                           child: Text("SignUp",

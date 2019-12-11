@@ -350,9 +350,9 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   abseil: 18063d773f5366ff8736a050fe035a28f635fd27
   BoringSSL-GRPC: db8764df3204ccea016e1c8dd15d9a9ad63ff318
-  cloud_firestore: c6e28e89a1bf98faab7fc8fdec20dc6020799cd1
+  cloud_firestore: 10fd4a09ebffc33efd64708106e2e7de701fe9ae
   Firebase: 458d109512200d1aca2e1b9b6cf7d68a869a4a46
-  firebase_auth: 55c9944133e1005a7d257035e2f36dd971859748
+  firebase_auth: 6aa030648265449af60ba3f8792035aa70c7324e
   firebase_core: 15d27cd74b2e40f8c29540707c0486bb561a92e8
   firebase_storage: d83bfc0e0e849b2f871a34c474466bf5014ff304
   FirebaseAnalytics: 45f36d9c429fc91d206283900ab75390cd05ee8a
